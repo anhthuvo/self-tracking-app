@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 
 const SleepRecordSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  confidence: { type: int },
-  motion: { type: int },
-  light: { type: int },
+  confidence: { type: Number },
+  motion: { type: Number },
+  light: { type: Number },
   time: { type: Date },
   createdAt: { type: Date, default: Date.now },
 });
