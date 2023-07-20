@@ -15,6 +15,6 @@ router.post('/summary/submit', checkAuthUser, sleepSummaryController.createSleep
 
 router.put('/summary/update/:id', checkAuthUser, sleepSummaryController.updateSleepSummary);
 
-router.get('/summaries', checkAuthUser, sleepSummaryController.getSleepSummarys);
+router.get('/summaries', checkAuthUser, sleepSummaryController.getSleepSummaries);
 
 module.exports = router;

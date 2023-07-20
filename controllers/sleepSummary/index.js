@@ -1,9 +1,9 @@
-const createSleepRecord = require('./createSleepSummary');
-const updateSleepRecord = require('./updateSleepSummary');
-const getSleepRecords = require('./getSleepSummaries');
+const createSleepSummary = require('./createSleepSummary');
+const updateSleepSummary = require('./updateSleepSummary');
+const getSleepSummaries = require('./getSleepSummaries');
 
 module.exports = {
-    createSleepRecord,
-    updateSleepRecord,
-    getSleepRecords
+    createSleepSummary,
+    updateSleepSummary,
+    getSleepSummaries
 }

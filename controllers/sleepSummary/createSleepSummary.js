@@ -24,7 +24,7 @@ const HttpError = require("../../models/http-error");
  *             example:   # Sample object
  *               confidence: 85
  *               motion: 1
- *              light: 1
+ *               light: 1
  *               time: 2023-07-10T23:19:13.146+00:00
  *     responses:
  *          '200':
