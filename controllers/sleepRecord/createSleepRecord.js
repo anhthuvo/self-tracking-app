@@ -33,23 +33,28 @@ const HttpError = require("../../models/http-error");
 const submitSleepRecord = async (req, res, next) => {
   const { userId } = req.userData;
 
-  let sleepRecord;
+  let sleepRecords = [];
   try {
-    sleepRecord = new SleepRecord({
-      confidence: req.body.confidence,
-      motion: req.body.motion,
-      light: req.body.light,
-      time: req.body.time,
-      user: userId,
-    });
-    await sleepRecord.save();
+    if (req.body.records && req.body.records.length > 0) {
+      for (record of req.body.records) {
+        let ele = new SleepRecord({
+          user: userId,
+          confidence: record.confidence,
+          motion: record.motion,
+          light: record.light,
+          time: record.time,
+        })
+        sleepRecords.push(ele);
+      }
+      sleepRecords = await SleepRecord.create(sleepRecords);
+    }
   } catch (err) {
     err && console.error(err);
     const error = new HttpError("Submit record failed, please try again.", 500);
     return next(error);
   }
 
-  res.status(201).json(factorRecord);
+  res.status(201).json(sleepRecords);
 };
 
 module.exports = submitSleepRecord;

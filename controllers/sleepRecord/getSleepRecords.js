@@ -21,7 +21,7 @@ const getSleepRecords = async (req, res, next) => {
     return next(error);
   }
 
-  res.status(201).json(records);
+  res.status(200).json(records);
 };
 
 module.exports = getSleepRecords;
