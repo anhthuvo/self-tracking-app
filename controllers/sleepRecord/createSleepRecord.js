@@ -25,7 +25,7 @@ const HttpError = require("../../models/http-error");
  *               confidence: 85
  *               motion: 1
  *               light: 1
- *               time: 2023-07-10T23:19:13.146+00:00
+ *               time: 1107110465663
  *     responses:
  *          '200':
  *              description: OK
@@ -42,7 +42,7 @@ const submitSleepRecord = async (req, res, next) => {
           confidence: record.confidence,
           motion: record.motion,
           light: record.light,
-          time: record.time,
+          time: new Date(record.time),
         })
         sleepRecords.push(ele);
       }
