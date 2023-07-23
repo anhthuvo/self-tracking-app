@@ -9,12 +9,12 @@ router.post('/record/submit', checkAuthUser, sleepRecordController.createSleepRe
 
 router.put('/record/update/:id', checkAuthUser, sleepRecordController.updateSleepRecord);
 
-router.get('/records', checkAuthUser, sleepRecordController.getSleepRecords);
+router.post('/records', checkAuthUser, sleepRecordController.getSleepRecords);
 
 router.post('/summary/submit', checkAuthUser, sleepSummaryController.createSleepSummary);
 
 router.put('/summary/update/:id', checkAuthUser, sleepSummaryController.updateSleepSummary);
 
-router.get('/summaries', checkAuthUser, sleepSummaryController.getSleepSummaries);
+router.post('/summaries', checkAuthUser, sleepSummaryController.getSleepSummaries);
 
 module.exports = router;

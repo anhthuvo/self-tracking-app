@@ -71,7 +71,7 @@ const login = async (req, res, next) => {
 
     let token = "";
     try {
-        token = jwt.sign({ userId: existingUser.id, email: existingUser.email, role: existingUser.role }, 'xanhduong')
+        token = jwt.sign({ userId: existingUser.id, email: existingUser.email, role: existingUser.role }, 'xanhduong', {})
     }
     catch (err) {
         const error = new HttpError(

@@ -29,7 +29,7 @@ module.exports = getSleepRecords;
 /**
  * @swagger
  * /api/factor/record:
- *   get:
+ *   post:
  *     summary: get record in a range of timestamp
  *     description: token expire in 24 hour
  *     requestBody:

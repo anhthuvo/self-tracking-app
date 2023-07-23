@@ -30,7 +30,7 @@ module.exports = getRecords;
 /**
  * @swagger
  * /api/factor/records:
- *   get:
+ *   post:
  *     summary: get record in a range of timestamp
  *     description: token expire in 24 hour
  *     requestBody:
