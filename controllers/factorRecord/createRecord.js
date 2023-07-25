@@ -35,8 +35,8 @@ const submitRecord = async (req, res, next) => {
       icon_source: req.body.icon_source,
       value: req.body.value,
       unit: req.body.unit,
-      start_at: new Date(req.body.start_at),
-      end_at: new Date(req.body.end_at),
+      start_at:  req.body.start_at,
+      end_at: req.body.end_at,
       user: userId,
     });
     await factorRecord.save();

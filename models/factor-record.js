@@ -5,8 +5,8 @@ const FactorRecordSchema = new mongoose.Schema({
   factor: { type: mongoose.Schema.Types.ObjectId, ref: "Factor" },
   value: { type: String },
   unit: { type: String, maxlength: 20 },
-  start_at: { type: Date },
-  end_at: { type: Date },
+  start_at: { type: Number },
+  end_at: { type: Number },
   createdAt: { type: Date, default: Date.now },
 });
 

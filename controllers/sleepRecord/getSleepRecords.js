@@ -12,7 +12,7 @@ const getSleepRecords = async (req, res, next) => {
   let records = [];
   try {
     records = await SleepRecord.find({
-      time: { $gte: new Date(req.body.start_at), $lte: new Date(req.body.end_at) },
+      time: { $gte: req.body.start_at, $lte: req.body.end_at },
       user: userId,
     }).exec();
   } catch (err) {

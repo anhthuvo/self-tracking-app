@@ -42,7 +42,7 @@ const submitSleepRecord = async (req, res, next) => {
           confidence: record.confidence,
           motion: record.motion,
           light: record.light,
-          time: new Date(record.time),
+          time: record.time,
         })
         sleepRecords.push(ele);
       }

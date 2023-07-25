@@ -12,8 +12,8 @@ const getRecords = async (req, res, next) => {
   let records = [];
   try {
     records = await FactorRecord.find({
-      start_at: { $gte: new Date(req.body.start_at) },
-      end_at: { $lte: new Date(req.body.end_at) },
+      start_at: { $gte: req.body.start_at },
+      end_at: { $lte: req.body.end_at },
       user: userId,
     }).exec();
   } catch (err) {

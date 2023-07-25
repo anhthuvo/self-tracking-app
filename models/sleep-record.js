@@ -5,7 +5,7 @@ const SleepRecordSchema = new mongoose.Schema({
   confidence: { type: Number },
   motion: { type: Number },
   light: { type: Number },
-  time: { type: Date },
+  time: { type: Number },
   createdAt: { type: Date, default: Date.now },
 });
 
