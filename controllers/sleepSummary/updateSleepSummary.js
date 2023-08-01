@@ -56,7 +56,6 @@ const updateSleepSummary = async (req, res, next) => {
         existingRecord.in_bed_at = req.body.in_bed_at,
         existingRecord.sleep_at = req.body.sleep_at,
         existingRecord.wakeup_at = req.body.wakeup_at,
-        existingRecord.wakeup_time = req.body.wakeup_time,
 
         updatedRecord = await existingRecord.save();
   } catch (err) {

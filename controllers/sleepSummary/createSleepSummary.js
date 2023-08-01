@@ -32,29 +32,57 @@ const HttpError = require("../../models/http-error");
  */
 const submitSleepSummary = async (req, res, next) => {
   const { userId } = req.userData;
-
   let sleepSummary;
+  let date = new Date()
+  let in_bed_at = date.getTime()
+  let upperLimit = date.setHours(24, 0, 0, 0);
+  let lowerLimit = upperLimit - 60*60*24*1000;
+  
   try {
-    sleepSummary = new SleepSummary({
-      self_assessment: req.body.self_assessment,
-      latency: req.body.latency,
-      duration: req.body.duration,
-      efficiency: req.body.efficiency,
-      overall_score: req.body.overall_score,
-      in_bed_at: req.body.in_bed_at,
-      sleep_at: req.body.sleep_at,
-      wakeup_at: req.body.wakeup_at,
-      wakeup_time: req.body.wakeup_time,
-      user: userId,
+    sleepSummary = await SleepSummary.findOne({ 
+      in_bed_at: { $gte: lowerLimit, $lte: upperLimit } ,
+      user: userId,    
     });
-    await sleepSummary.save();
   } catch (err) {
-    err && console.error(err);
-    const error = new HttpError("Submit record failed, please try again.", 500);
+    const error = new HttpError("Failed to update Record information", 500);
     return next(error);
   }
 
-  res.status(201).json(factorRecord);
+  if (!sleepSummary) {
+    try {
+      sleepSummary = new SleepSummary({
+        self_assessment: 0,
+        latency: 0,
+        duration: 0,
+        efficiency: 0,
+        overall_score: 0,
+        in_bed_at,
+        sleep_at: 0,
+        wakeup_at: 0,
+        user: userId,
+      });
+      await sleepSummary.save();
+    } catch (err) {
+      err && console.error(err);
+      const error = new HttpError(
+        "Submit record failed, please try again.",
+        500
+      );
+      return next(error);
+    }
+  } else {
+    sleepSummary.self_assessment = 0
+    sleepSummary.latency = 0
+    sleepSummary.duration = 0
+    sleepSummary.efficiency = 0
+    sleepSummary.overall_score = 0
+    sleepSummary.in_bed_at = in_bed_at
+    sleepSummary.sleep_at = 0
+    sleepSummary.wakeup_at = 0
+    await sleepSummary.save();
+  }
+
+  res.status(201).json(sleepSummary);
 };
 
 module.exports = submitSleepSummary;
