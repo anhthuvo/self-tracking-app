@@ -10,6 +10,7 @@ const SleepSummarySchema = new mongoose.Schema({
   sleep_at: { type: Number },
   wakeup_at: { type: Number },
   overall_score: { type: Number },
+  wakeup_time: { type: Number },
   createdAt: { type: Date, default: Date.now },
 });
 
