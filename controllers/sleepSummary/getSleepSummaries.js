@@ -28,7 +28,7 @@ module.exports = getSleepSummarys;
 
 /**
  * @swagger
- * /api/factor/record:
+ * /api/sleep/summaries:
  *   post:
  *     summary: get record in a range of timestamp
  *     description: token expire in 24 hour
@@ -43,8 +43,8 @@ module.exports = getSleepSummarys;
  *               end_at:
  *                 type: timestamp
  *             example:   # Sample object
- *               start_at: 2023-07-10T13:19:13.146Z
- *               end_at: 2023-07-10T20:19:13.146Z
+ *               start_at: 1690713398000
+ *               end_at: 1690759538000
  *     responses:
  *          '200':
  *              description: OK

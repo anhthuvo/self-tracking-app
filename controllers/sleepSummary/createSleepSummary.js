@@ -178,11 +178,11 @@ const submitSleepSummary = async (req, res, next) => {
           overall_score += 3;
         }
 
-        if (sleepSummary.wakeup_time < 1) {
+        if (sleepSummary.wakeup_time < 2) {
           overall_score += 0;
-        } else if (sleepSummary.wakeup_time < 2) {
-          overall_score += 1;
         } else if (sleepSummary.wakeup_time < 3) {
+          overall_score += 1;
+        } else if (sleepSummary.wakeup_time < 4) {
           overall_score += 2;
         } else {
           overall_score += 3;
