@@ -134,7 +134,7 @@ const submitSleepSummary = async (req, res, next) => {
         sleepSummary.wakeup_at = currentTime;
         sleepSummary.latency = sleepSummary.sleep_at - sleepSummary.in_bed_at;
         sleepSummary.duration = sleepSummary.wakeup_at - sleepSummary.sleep_at;
-        sleepSummary.efficiency = Math.floor(
+        sleepSummary.efficiency = Math.ceil(
           (sleepSummary.duration /
             (sleepSummary.wakeup_at - sleepSummary.in_bed_at)) *
             100
