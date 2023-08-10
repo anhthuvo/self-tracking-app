@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const FactorRecordSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  factor: { type: mongoose.Schema.Types.ObjectId, ref: "Factor" },
+  factor_code: { type: String },
   value: { type: String },
   unit: { type: String, maxlength: 20 },
   start_at: { type: Number },

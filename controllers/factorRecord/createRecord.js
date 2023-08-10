@@ -37,7 +37,7 @@ const submitRecord = async (req, res, next) => {
       start_at:  req.body.start_at,
       end_at: req.body.end_at,
       user: userId,
-      factor: req.body.factor_id
+      factor_code: req.body.factor_code
     });
     await factorRecord.save();
   } catch (err) {
