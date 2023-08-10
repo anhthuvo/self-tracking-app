@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const FactorSchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   title: { type: String },
   code: { type: String },
   icon_source: { type: String },

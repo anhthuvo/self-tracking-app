@@ -32,12 +32,12 @@ const submitRecord = async (req, res, next) => {
   let factorRecord;
   try {
     factorRecord = new FactorRecord({
-      icon_source: req.body.icon_source,
       value: req.body.value,
       unit: req.body.unit,
       start_at:  req.body.start_at,
       end_at: req.body.end_at,
       user: userId,
+      factor: req.body.factor_id
     });
     await factorRecord.save();
   } catch (err) {
