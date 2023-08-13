@@ -113,18 +113,19 @@ const submitSleepSummary = async (req, res, next) => {
 
         let preRecord;
         sleepSummary.wakeup_time = 0;
-        for (let record of records) {
-          if (!sleepSummary.sleep_at && record.confidence > 90) {
-            sleepSummary.sleep_at = record.time;
+        for (let index in records) {
+          if (index === 0) continue;
+          if (!sleepSummary.sleep_at && records[index].confidence > 90) {
+            sleepSummary.sleep_at = records[index].time;
           }
           if (
             preRecord &&
             preRecord.confidence > 90 &&
-            record.confidence < 80
+            records[index].confidence < 80
           ) {
             sleepSummary.wakeup_time += 1;
           }
-          preRecord = record;
+          preRecord = records[index];
         }
 
         if (!sleepSummary.sleep_at) {
