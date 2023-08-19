@@ -114,7 +114,7 @@ const submitSleepSummary = async (req, res, next) => {
         let preRecord;
         sleepSummary.wakeup_time = 0;
         for (let index in records) {
-          if (index === 0) continue;
+          if (index == 0) continue;
           if (!sleepSummary.sleep_at && records[index].confidence > 90) {
             sleepSummary.sleep_at = records[index].time;
           }
@@ -133,8 +133,8 @@ const submitSleepSummary = async (req, res, next) => {
         }
         sleepSummary.self_assessment = req.body.self_assessment;
         sleepSummary.wakeup_at = currentTime;
-        sleepSummary.latency = sleepSummary.sleep_at - sleepSummary.in_bed_at;
-        sleepSummary.duration = sleepSummary.wakeup_at - sleepSummary.sleep_at;
+        sleepSummary.latency = (sleepSummary.sleep_at - sleepSummary.in_bed_at)/(60*1000);
+        sleepSummary.duration = (sleepSummary.wakeup_at - sleepSummary.sleep_at)/(60 * 60 * 7 * 1000);
         sleepSummary.efficiency = Math.ceil(
           (sleepSummary.duration /
             (sleepSummary.wakeup_at - sleepSummary.in_bed_at)) *
@@ -149,44 +149,36 @@ const submitSleepSummary = async (req, res, next) => {
         }
         overall_score += sleepSummary.self_assessment;
 
-        if (sleepSummary.latency < 60 * 15 * 1000) {
-          overall_score += 0;
-        } else if (sleepSummary.latency < 60 * 30 * 1000) {
-          overall_score += 1;
-        } else if (sleepSummary.latency < 60 * 60 * 1000) {
-          overall_score += 2;
-        } else {
+        if (sleepSummary.latency > 60) {
           overall_score += 3;
+        } else if (sleepSummary.latency > 30) {
+          overall_score += 2;
+        } else if (sleepSummary.latency > 15) {
+          overall_score += 1;
+        } 
+
+        if (sleepSummary.efficiency < 65 ) {
+          overall_score += 3;
+        } else if (sleepSummary.efficiency < 75) {
+          overall_score += 2;
+        } else if (sleepSummary.efficiency > 85) {
+          overall_score += 1;
         }
 
-        if (sleepSummary.efficiency > 85) {
-          overall_score += 0;
-        } else if (sleepSummary.efficiency > 74) {
-          overall_score += 1;
-        } else if (sleepSummary.efficiency > 65) {
-          overall_score += 2;
-        } else {
+        if (sleepSummary.duration < 5) {
           overall_score += 3;
+        } else if (sleepSummary.duration < 6) {
+          overall_score += 2;
+        } else if (sleepSummary.duration < 7) {
+          overall_score += 1;
         }
 
-        if (sleepSummary.duration > 60 * 60 * 7 * 1000) {
-          overall_score += 0;
-        } else if (sleepSummary.duration > 60 * 60 * 6 * 1000) {
-          overall_score += 1;
-        } else if (sleepSummary.duration > 60 * 60 * 5 * 1000) {
-          overall_score += 2;
-        } else {
+        if (sleepSummary.wakeup_time > 2) {
           overall_score += 3;
-        }
-
-        if (sleepSummary.wakeup_time < 2) {
-          overall_score += 0;
-        } else if (sleepSummary.wakeup_time < 3) {
-          overall_score += 1;
-        } else if (sleepSummary.wakeup_time < 4) {
+        } else if (sleepSummary.wakeup_time = 2) {
           overall_score += 2;
-        } else {
-          overall_score += 3;
+        } else if (sleepSummary.wakeup_time = 1) {
+          overall_score += 1;
         }
 
         sleepSummary.overall_score = overall_score;
