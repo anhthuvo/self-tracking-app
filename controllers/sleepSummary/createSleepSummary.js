@@ -133,8 +133,8 @@ const submitSleepSummary = async (req, res, next) => {
         }
         sleepSummary.self_assessment = req.body.self_assessment;
         sleepSummary.wakeup_at = currentTime;
-        sleepSummary.latency = (sleepSummary.sleep_at - sleepSummary.in_bed_at)/(60*1000);
-        sleepSummary.duration = (sleepSummary.wakeup_at - sleepSummary.sleep_at)/(60 * 60 * 7 * 1000);
+        sleepSummary.latency = sleepSummary.sleep_at - sleepSummary.in_bed_at;
+        sleepSummary.duration = sleepSummary.wakeup_at - sleepSummary.sleep_at;
         sleepSummary.efficiency = Math.ceil(
           (sleepSummary.duration /
             (sleepSummary.wakeup_at - sleepSummary.in_bed_at)) *
@@ -149,15 +149,15 @@ const submitSleepSummary = async (req, res, next) => {
         }
         overall_score += sleepSummary.self_assessment;
 
-        if (sleepSummary.latency > 60) {
+        if (sleepSummary.latency > 60 * 60 * 1000) {
           overall_score += 3;
-        } else if (sleepSummary.latency > 30) {
+        } else if (sleepSummary.latency > 30 * 60 * 1000) {
           overall_score += 2;
-        } else if (sleepSummary.latency > 15) {
+        } else if (sleepSummary.latency > 15 * 60 * 1000) {
           overall_score += 1;
-        } 
+        }
 
-        if (sleepSummary.efficiency < 65 ) {
+        if (sleepSummary.efficiency < 65) {
           overall_score += 3;
         } else if (sleepSummary.efficiency < 75) {
           overall_score += 2;
@@ -165,19 +165,19 @@ const submitSleepSummary = async (req, res, next) => {
           overall_score += 1;
         }
 
-        if (sleepSummary.duration < 5) {
+        if (sleepSummary.duration < 5 * 60 * 60 * 1000) {
           overall_score += 3;
-        } else if (sleepSummary.duration < 6) {
+        } else if (sleepSummary.duration < 6 * 60 * 60 * 1000) {
           overall_score += 2;
-        } else if (sleepSummary.duration < 7) {
+        } else if (sleepSummary.duration < 7 * 60 * 60 * 1000) {
           overall_score += 1;
         }
 
         if (sleepSummary.wakeup_time > 2) {
           overall_score += 3;
-        } else if (sleepSummary.wakeup_time = 2) {
+        } else if (sleepSummary.wakeup_time == 2) {
           overall_score += 2;
-        } else if (sleepSummary.wakeup_time = 1) {
+        } else if (sleepSummary.wakeup_time == 1) {
           overall_score += 1;
         }
 
