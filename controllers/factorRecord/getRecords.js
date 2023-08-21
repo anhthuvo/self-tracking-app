@@ -22,7 +22,7 @@ const getRecords = async (req, res, next) => {
     return next(error);
   }
 
-  res.status(201).json(records);
+  res.status(201).json(records.map(record => record.toObject({ getters: true })));
 };
 
 module.exports = getRecords;
